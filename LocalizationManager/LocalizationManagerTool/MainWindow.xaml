@@ -6,12 +6,22 @@
         xmlns:local="clr-namespace:LocalizationManagerTool"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid VerticalAlignment="Top" Margin="0,0,0,-1">
-        <Menu VerticalAlignment="Top" Height="22">
-            <Button Content="File" Click="Button_Click"/>
-            <Button Content="Edit" Click="Button_Edit"/>
-        </Menu>
-        <DataGrid Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,22,0,0"/>
+    <Grid>
+        <!-- Menu contenant le dropdown "File" -->
+        <Menu VerticalAlignment="Top" HorizontalAlignment="Left">
+            <MenuItem Header="File">
+                <!-- Sous-menu Export avec des options de format -->
+                <MenuItem Header="Export">
+                    <MenuItem Header=".csv" Click="ExportCsv_Click"/>
+                    <MenuItem Header=".xml" Click="ExportXml_Click"/>
+                    <MenuItem Header=".json" Click="ExportJson_Click"/>
+                    <MenuItem Header=".cpp" Click="ExportCpp_Click"/>
+                    <MenuItem Header=".cs" Click="ExportCs_Click"/>
+                </MenuItem>
 
+                <!-- Option Import -->
+                <MenuItem Header="Import" Click="Import_Click"/>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>
