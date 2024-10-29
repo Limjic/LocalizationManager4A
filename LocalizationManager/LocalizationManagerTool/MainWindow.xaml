@@ -23,6 +23,6 @@
                 <MenuItem Header="Import" Click="Import_Click"/>
             </MenuItem>
         </Menu>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,18,0,-18" SelectionChanged="DataGrid_SelectionChanged"/>
+        <DataGrid Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,18,0,-18" SelectionChanged="DataGrid_SelectionChanged"/>
     </Grid>
 </Window>
