@@ -31,7 +31,7 @@ namespace LocalizationManagerTool
 
         private void ExportCpp_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Exporting to .cpp");
+            ExportDataGridToCpp(dataGrid);
         }
 
         private void ExportCs_Click(object sender, RoutedEventArgs e)
