@@ -11,7 +11,7 @@ namespace LocalizationManagerTool
 
         private void Import_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Import clicked");
+            //MessageBox.Show("Import clicked");
         }
 
         private void ExportCsv_Click(object sender, RoutedEventArgs e)
