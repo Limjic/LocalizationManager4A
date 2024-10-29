@@ -13,9 +13,7 @@ namespace LocalizationManagerTool
         {
             // Configure open file dialog box
             var dialog = new Microsoft.Win32.OpenFileDialog();
-            dialog.FileName = "Document"; // Default file name
-            dialog.DefaultExt = ".csv"; // Default file extension
-            dialog.Filter = "Excel Documents (.csv)|*.csv"; // Filter files by extension
+            dialog.FileName = ""; // Default file name
 
             // Show open file dialog box
             bool? result = dialog.ShowDialog();
@@ -25,6 +23,7 @@ namespace LocalizationManagerTool
             {
                 // Open document
                 string filename = dialog.FileName;
+                MessageBox.Show(filename);
             }
         }
     }

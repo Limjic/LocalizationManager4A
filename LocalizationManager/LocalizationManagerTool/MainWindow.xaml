@@ -20,7 +20,7 @@
                 </MenuItem>
 
                 <!-- Option Import -->
-                <MenuItem Header="Import" Click="Import_Click"/>
+                <MenuItem Header="Import" Click="OpenCSV"/>
             </MenuItem>
         </Menu>
         <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,18,0,-18" SelectionChanged="DataGrid_SelectionChanged"/>
