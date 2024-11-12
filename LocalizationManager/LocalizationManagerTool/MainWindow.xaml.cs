@@ -38,7 +38,11 @@ namespace LocalizationManagerTool
 
         private void ExportCpp_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Exporting to .cpp");
+            //MessageBox.Show("Exporting to .cpp");
+
+            // TEST ONLY
+            // To move where we wanna export
+            //ImportJsonToDataGrid(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.json");
         }
 
         private void ExportCs_Click(object sender, RoutedEventArgs e)
