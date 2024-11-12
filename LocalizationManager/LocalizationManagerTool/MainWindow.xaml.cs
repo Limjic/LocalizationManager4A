@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Data;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace LocalizationManagerTool
 {
@@ -7,6 +9,10 @@ namespace LocalizationManagerTool
         public MainWindow()
         {
             InitializeComponent();
+            DataTable test = new DataTable();
+
+            test.Columns.Add("Name");
+            dataGrid.ItemsSource = test.DefaultView;
         }
 
         private void Import_Click(object sender, RoutedEventArgs e)
@@ -26,12 +32,13 @@ namespace LocalizationManagerTool
 
         private void ExportJson_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Exporting to .json");
+            //MessageBox.Show("Exporting to .json");
+            ExportDataGridToJson(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.json");
         }
 
         private void ExportCpp_Click(object sender, RoutedEventArgs e)
         {
-            ExportDataGridToCpp(dataGrid);
+            MessageBox.Show("Exporting to .cpp");
         }
 
         private void ExportCs_Click(object sender, RoutedEventArgs e)
