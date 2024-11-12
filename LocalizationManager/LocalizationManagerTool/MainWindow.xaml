@@ -22,9 +22,9 @@
                 <!-- Option Import -->
                 <MenuItem Header="Import" Click="OpenCSV"/>
 
-                <!--<MenuItem Header="Add Language" Click="AddLanguage_Click">
-                    
-                </MenuItem>-->
+                <MenuItem Header="Add Language" Click="AddLanguage_Click">
+
+                </MenuItem>
             </MenuItem>
         </Menu>
         <DataGrid Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,18,0,-18" SelectionChanged="DataGrid_SelectionChanged"/>

@@ -14,20 +14,20 @@ namespace LocalizationManagerTool
             dataGrid.ItemsSource = test.DefaultView;
         }
 
-        //private void AddLanguage_Click(object sender, RoutedEventArgs e)
-        //{
-        //    //var dialog = new AddLanguageWindow();
+        private void AddLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new AddLanguageWindow();
             
-        //    bool? result = dialog.ShowDialog();
+            bool? result = dialog.ShowDialog();
 
-        //    if (result == true)
-        //    {
-        //        string language = dialog.input.Text;
-        //        DataGridTextColumn col = new DataGridTextColumn();
-        //        col.Header = language;
-        //        dataGrid.Columns.Add(col);
-        //    }
-        //}
+            if (result == true)
+            {
+                string language = dialog.input.Text;
+                DataGridTextColumn col = new DataGridTextColumn();
+                col.Header = language;
+                dataGrid.Columns.Add(col);
+            }
+        }
 
         private void Import_Click(object sender, RoutedEventArgs e)
         {

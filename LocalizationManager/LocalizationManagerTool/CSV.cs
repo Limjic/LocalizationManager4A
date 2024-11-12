@@ -26,25 +26,20 @@ namespace LocalizationManagerTool
             {
                 // Open document
                 string filename = dialog.FileName;
-                if (filename.Contains(".odt"))
+                
+                if (filename.Contains(".csv"))
                 {
-                    DataGrid dg = new DataGrid();
                     using (StreamReader sr = new StreamReader(filename))
                     {
                         string strLine = sr.ReadLine();
 
-                        string[] strArray = strLine.Split(';');
-
-                        foreach (string value in strArray)
+                        if (strLine != null)
                         {
-                            dg.Items.Add(value);
-                        }
-
-                        while (sr.Peek() >= 0)
-                        {
-                            strLine = sr.ReadLine();
-                            strArray = strLine.Split(';');
-                            //dg.Rows.Add(strArray);
+                            string[] strArray = strLine.Split(',');
+                            foreach (string value in strArray)
+                            {
+                                dataGrid.Items.Add(value);
+                            }
                         }
                     }
                 }
