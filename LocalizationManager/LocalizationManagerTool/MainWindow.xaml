@@ -20,13 +20,13 @@
                 </MenuItem>
 
                 <!-- Option Import -->
-                <MenuItem Header="Import" Click="OpenCSV"/>
+                <MenuItem Header="Import" Click="Import_Click"/>
 
                 <MenuItem Header="Add Language" Click="AddLanguage_Click">
 
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <DataGrid Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,18,0,-18" SelectionChanged="DataGrid_SelectionChanged"/>
+        <DataGrid Name="dataGrid" Margin="0,18,0,-18" SelectionChanged="DataGrid_SelectionChanged"/>
     </Grid>
 </Window>

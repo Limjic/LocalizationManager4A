@@ -1,37 +1,57 @@
-﻿using System.Data;
+﻿using System.Collections.ObjectModel;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LocalizationManagerTool
 {
     public partial class MainWindow : Window
     {
+        DataTable dataTable;
         public MainWindow()
         {
             InitializeComponent();
-            DataTable test = new DataTable();
-            test.Columns.Add("Name");
-            dataGrid.ItemsSource = test.DefaultView;
+            dataTable = new DataTable();
+            dataTable.Columns.Add("Name");
+            dataGrid.ItemsSource = dataTable.DefaultView;
         }
 
         private void AddLanguage_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new AddLanguageWindow();
-            
+
             bool? result = dialog.ShowDialog();
 
             if (result == true)
             {
                 string language = dialog.input.Text;
-                DataGridTextColumn col = new DataGridTextColumn();
-                col.Header = language;
-                dataGrid.Columns.Add(col);
+                dataTable.Columns.Add(language);
+                dataGrid.ItemsSource = null;
+                dataGrid.ItemsSource = dataTable.DefaultView;
             }
         }
 
         private void Import_Click(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show("Import clicked");
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.FileName = ""; // Default file name
+
+            // Show open file dialog box
+            bool? result = dialog.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dialog.FileName;
+
+                if (filename.Contains(".csv"))
+                {
+                    OpenCSV(filename);
+                }
+            }
         }
 
         private void ExportCsv_Click(object sender, RoutedEventArgs e)

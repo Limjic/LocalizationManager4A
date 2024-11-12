@@ -12,35 +12,18 @@ namespace LocalizationManagerTool
 {
     public partial class MainWindow
     {
-        private void OpenCSV(object sender, RoutedEventArgs e)
+        private void OpenCSV(string filename)
         {
-            // Configure open file dialog box
-            var dialog = new Microsoft.Win32.OpenFileDialog();
-            dialog.FileName = ""; // Default file name
-
-            // Show open file dialog box
-            bool? result = dialog.ShowDialog();
-
-            // Process open file dialog box results
-            if (result == true)
+            using (StreamReader sr = new StreamReader(filename))
             {
-                // Open document
-                string filename = dialog.FileName;
-                
-                if (filename.Contains(".csv"))
-                {
-                    using (StreamReader sr = new StreamReader(filename))
-                    {
-                        string strLine = sr.ReadLine();
+                string strLine = sr.ReadLine();
 
-                        if (strLine != null)
-                        {
-                            string[] strArray = strLine.Split(',');
-                            foreach (string value in strArray)
-                            {
-                                dataGrid.Items.Add(value);
-                            }
-                        }
+                if (strLine != null)
+                {
+                    string[] strArray = strLine.Split(',');
+                    foreach (string value in strArray)
+                    {
+                       dataGrid.Items.Add(value);
                     }
                 }
             }
