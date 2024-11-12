@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace LocalizationManagerTool
 {
@@ -23,7 +26,28 @@ namespace LocalizationManagerTool
             {
                 // Open document
                 string filename = dialog.FileName;
-                MessageBox.Show(filename);
+                if (filename.Contains(".odt"))
+                {
+                    DataGrid dg = new DataGrid();
+                    using (StreamReader sr = new StreamReader(filename))
+                    {
+                        string strLine = sr.ReadLine();
+
+                        string[] strArray = strLine.Split(';');
+
+                        foreach (string value in strArray)
+                        {
+                            dg.Items.Add(value);
+                        }
+
+                        while (sr.Peek() >= 0)
+                        {
+                            strLine = sr.ReadLine();
+                            strArray = strLine.Split(';');
+                            //dg.Rows.Add(strArray);
+                        }
+                    }
+                }
             }
         }
     }
