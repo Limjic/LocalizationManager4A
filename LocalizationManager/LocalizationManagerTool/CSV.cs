@@ -21,9 +21,14 @@ namespace LocalizationManagerTool
                 if (strLine != null)
                 {
                     string[] strArray = strLine.Split(',');
+                    int colCounter = 1;
+                    dataTable.Rows.Add();
                     foreach (string value in strArray)
                     {
-                       dataGrid.Items.Add(value);
+                        if (colCounter > dataTable.Columns.Count)
+                        {
+                            dataTable.Columns.Add("language" + colCounter.ToString());
+                        }
                     }
                 }
             }
