@@ -10,10 +10,24 @@ namespace LocalizationManagerTool
         {
             InitializeComponent();
             DataTable test = new DataTable();
-
             test.Columns.Add("Name");
             dataGrid.ItemsSource = test.DefaultView;
         }
+
+        //private void AddLanguage_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //var dialog = new AddLanguageWindow();
+            
+        //    bool? result = dialog.ShowDialog();
+
+        //    if (result == true)
+        //    {
+        //        string language = dialog.input.Text;
+        //        DataGridTextColumn col = new DataGridTextColumn();
+        //        col.Header = language;
+        //        dataGrid.Columns.Add(col);
+        //    }
+        //}
 
         private void Import_Click(object sender, RoutedEventArgs e)
         {
@@ -38,11 +52,7 @@ namespace LocalizationManagerTool
 
         private void ExportCpp_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("Exporting to .cpp");
-
-            // TEST ONLY
-            // To move where we wanna export
-            //ImportJsonToDataGrid(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.json");
+            MessageBox.Show("Exporting to .cpp");
         }
 
         private void ExportCs_Click(object sender, RoutedEventArgs e)
