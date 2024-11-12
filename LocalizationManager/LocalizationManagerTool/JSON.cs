@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Reflection;
 using System.Windows.Controls;
@@ -13,45 +14,28 @@ namespace LocalizationManagerTool
     {
         public void ExportDataGridToJson(DataGrid dataGrid, string filePath)
         {
-            // List to hold each row as a dictionary
             var rows = new List<Dictionary<string, object>>();
 
             // Loop through each item in the DataGrid
             foreach (var item in dataGrid.Items)
             {
+                // Skip any items that are not DataRowView (such as empty placeholders)
+                if (item is not DataRowView rowView) continue;
+
                 var row = new Dictionary<string, object>();
 
-                // Loop through each column in the DataGrid
-                foreach (DataGridColumn column in dataGrid.Columns)
+                // Loop through each column in the DataRowView
+                foreach (DataColumn column in rowView.Row.Table.Columns)
                 {
-                    string bindingPath = null;
+                    // Get the column name and its corresponding value
+                    string columnName = column.ColumnName;
+                    object cellValue = rowView.Row[columnName];
 
-                    // Handle DataGridBoundColumn
-                    if (column is DataGridBoundColumn boundColumn)
-                    {
-                        // Cast BindingBase to Binding to access Path
-                        if (boundColumn.Binding is Binding binding)
-                        {
-                            bindingPath = binding.Path?.Path;
-                        }
-                    }
-                    // Handle DataGridTemplateColumn (if applicable)
-                    else if (column is DataGridTemplateColumn templateColumn)
-                    {
-                        // For template columns, you might need to set a Tag or use an alternative method
-                        bindingPath = templateColumn.Header?.ToString(); // Using Header as a simple identifier here
-                    }
-
-                    if (bindingPath == null) continue;
-
-                    // Get the value of the cell
-                    var cellValue = item.GetType().GetProperty(bindingPath, BindingFlags.Public | BindingFlags.Instance)?.GetValue(item, null);
-
-                    // Add to dictionary
-                    row[bindingPath] = cellValue;
+                    // Add to the row dictionary
+                    row[columnName] = cellValue;
                 }
 
-                // Add the row to the list
+                // Add the row to the rows list
                 rows.Add(row);
             }
 
