@@ -74,11 +74,13 @@ namespace LocalizationManagerTool
         private void ExportCpp_Click(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show("Exporting to .cpp");
+            ExportDataGridToCpp(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.cpp", "C:\\Users\\Etudiant1\\Desktop\\test\\file.h");
+
 
             // TEST ONLY
             // To move where we wanna import
 
-            ImportXmlToDataGrid(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.xml");
+            //ImportXmlToDataGrid(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.xml");
             //ImportJsonToDataGrid(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.json");
 
         }

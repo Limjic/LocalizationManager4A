@@ -86,5 +86,6 @@ namespace LocalizationManagerTool
             // Set the DataGrid's ItemsSource to the DataTable's DefaultView
             dataGrid.ItemsSource = dataTable.DefaultView;
         }
+
     }
 }
