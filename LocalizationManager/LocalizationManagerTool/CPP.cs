@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,35 +13,68 @@ namespace LocalizationManagerTool
             // Ensure DataGrid is bound to a DataTable
             if (dataGrid.ItemsSource is DataView dataView && dataView.Table is DataTable dataTable)
             {
-                // Ensure the DataTable has the correct columns
+                // Ensure the DataTable has at least one column
                 EnsureColumnsExist(dataTable);
 
                 // Open the .h file for writing
                 using (StreamWriter hFile = new StreamWriter(hFilePath))
                 {
                     hFile.WriteLine("#include <map>");
+                    hFile.WriteLine("#include <string>");
+                    hFile.WriteLine("#include <vector>");
                     hFile.WriteLine("using namespace std;");
+                    hFile.WriteLine(); // Ceci est un retour a la ligne
+                    hFile.WriteLine("class LanguageDataMap");
+                    hFile.WriteLine("{");
+                    hFile.WriteLine("public:");
+                    hFile.WriteLine("\tLanguageDataMap();");
                     hFile.WriteLine();
-                    hFile.WriteLine("extern map<string, string> dataMap;");
+                    hFile.WriteLine("\tmap<string, vector<string>> GetDataMap();");
+                    hFile.WriteLine("\tvoid SetDataMap(map<string, vector<string>> _dataMap);");
+                    hFile.WriteLine("private:");
+                    hFile.WriteLine("\tmap<string, vector<string>> dataMap;");
+                    hFile.WriteLine("};");
                 }
 
                 // Open the .cpp file for writing
                 using (StreamWriter cppFile = new StreamWriter(cppFilePath))
                 {
-                    cppFile.WriteLine("#include \"YourHeader.h\"");
-                    cppFile.WriteLine("map<string, string> dataMap = {");
+                    cppFile.WriteLine("#include \"file.h\"");
+                    cppFile.WriteLine();
+                    cppFile.WriteLine("LanguageDataMap::LanguageDataMap()");
+                    cppFile.WriteLine("{");
 
                     // Loop through the DataTable and write data to the map initialization in .cpp
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        // Check that columns "Name" and "Value" contain data
-                        string key = row["Name"]?.ToString() ?? "Unnamed";
-                        string value = row["Value"]?.ToString() ?? "NoValue";
+                        // Use the first column as the key, and the rest as the values
+                        string key = row[0]?.ToString() ?? "Unnamed";
+                        var values = new List<string>();
 
-                        cppFile.WriteLine($"    {{ \"{key}\", \"{value}\" }},");
+                        // Gather all values except the key
+                        for (int col = 1; col < dataTable.Columns.Count; col++)
+                        {
+                            string value = row[col]?.ToString() ?? "NoValue";
+                            values.Add(value);
+                        }
+
+                        // Convert the values into a C++ vector representation
+                        string valuesString = string.Join(", ", values.ConvertAll(v => $"\"{v}\""));
+                        cppFile.WriteLine($"    {{ \"{key}\", {{ {valuesString} }} }},");
                     }
 
                     cppFile.WriteLine("};");
+                    cppFile.WriteLine("}");
+                    cppFile.WriteLine();
+                    cppFile.WriteLine("map<string, vector<string>> LanguageDataMap::GetDataMap()");
+                    cppFile.WriteLine("{");
+                    cppFile.WriteLine("\treturn dataMap;");
+                    cppFile.WriteLine("}");
+                    cppFile.WriteLine();
+                    cppFile.WriteLine("void LanguageDataMap::SetDataMap(map<string, vector<string>> _dataMap)");
+                    cppFile.WriteLine("{");
+                    cppFile.WriteLine("\tdataMap = _dataMap;\r\n");
+                    cppFile.WriteLine("}");
                 }
 
                 MessageBox.Show("Data exported to C++ files successfully!");
@@ -53,19 +85,13 @@ namespace LocalizationManagerTool
             }
         }
 
-
         public void EnsureColumnsExist(DataTable dataTable)
         {
-            if (!dataTable.Columns.Contains("Name"))
+            // Ensure at least one column exists
+            if (dataTable.Columns.Count == 0)
             {
-                dataTable.Columns.Add("Name");
-            }
-
-            if (!dataTable.Columns.Contains("Value"))
-            {
-                dataTable.Columns.Add("Value");
+                dataTable.Columns.Add("Column1");
             }
         }
     }
-
 }
