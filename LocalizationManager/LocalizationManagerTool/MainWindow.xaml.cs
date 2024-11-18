@@ -50,6 +50,14 @@ namespace LocalizationManagerTool
                 {
                     OpenCSV(filename);
                 }
+                else if(filename.Contains(".xml"))
+                {
+                    ImportXmlToDataGrid(dataGrid, filename);
+                }
+                else if(filename.Contains(".json"))
+                {
+                    ImportJsonToDataGrid(dataGrid, filename);
+                }
             }
         }
 
