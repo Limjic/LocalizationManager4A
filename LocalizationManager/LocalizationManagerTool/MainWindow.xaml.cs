@@ -61,14 +61,38 @@ namespace LocalizationManagerTool
             }
         }
 
+        private bool GetExportFileName(out string filename, string extension)
+        {
+            var dialog = new Microsoft.Win32.SaveFileDialog();
+            dialog.FileName = "file" + extension;
+            bool? result = dialog.ShowDialog();
+            filename = "";
+            if (result == true)
+            {
+                filename = dialog.FileName;
+                if (!filename.Contains(extension))
+                {
+                    filename += extension;
+                }
+                return true;
+            }
+
+            return false;
+        }
+
         private void ExportCsv_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Exporting to .csv");
+
         }
 
         private void ExportXml_Click(object sender, RoutedEventArgs e)
         {
-            ExportDataGridToXml(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.xml");
+            string filename;
+            GetExportFileName(out filename, ".xml");
+            //ExportDataGridToXml(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.xml");
+            ExportDataGridToXml(dataGrid, filename);
+            
         }
 
         private void ExportJson_Click(object sender, RoutedEventArgs e)
