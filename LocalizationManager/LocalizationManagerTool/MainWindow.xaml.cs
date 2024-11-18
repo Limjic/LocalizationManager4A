@@ -1,8 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.Data;
+﻿using System.Data;
 using System.Windows;
-using System.Windows.Controls;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace LocalizationManagerTool
 {
@@ -40,6 +37,8 @@ namespace LocalizationManagerTool
 
             // Show open file dialog box
             bool? result = dialog.ShowDialog();
+            dataTable = new DataTable();
+            dataTable.Columns.Add("Name");
 
             // Process open file dialog box results
             if (result == true)

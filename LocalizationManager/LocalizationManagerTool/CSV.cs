@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.IO;
 
 namespace LocalizationManagerTool
 {
@@ -18,15 +10,25 @@ namespace LocalizationManagerTool
             {
                 string strLine = sr.ReadLine();
 
-                if (strLine != null)
+                while (strLine != null)
                 {
                     string[] strArray = strLine.Split(',');
+                    int colCounter = 1;
                     foreach (string value in strArray)
                     {
-                       dataGrid.Items.Add(value);
+                        if (colCounter > dataTable.Columns.Count)
+                        {
+                            dataTable.Columns.Add("language" + colCounter.ToString());
+                        }
+                        colCounter++;
                     }
+                    dataTable.Rows.Add(strArray);
+
+                    strLine = sr.ReadLine();
                 }
             }
+            dataGrid.ItemsSource = null;
+            dataGrid.ItemsSource = dataTable.DefaultView;
         }
     }
 }
