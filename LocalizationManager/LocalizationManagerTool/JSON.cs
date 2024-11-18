@@ -59,16 +59,14 @@ namespace LocalizationManagerTool
             // Parse JSON into a list of dictionaries (each dictionary represents a row)
             var rows = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
 
-            // Create a DataTable to hold the data
-            var dataTable = new DataTable();
-
             // If there is data, set up columns and rows in the DataTable
             if (rows != null && rows.Count > 0)
             {
                 // Create columns in the DataTable based on the JSON keys
                 foreach (string columnName in rows[0].Keys)
                 {
-                    dataTable.Columns.Add(columnName);
+                    if (!dataTable.Columns.Contains(columnName))
+                        dataTable.Columns.Add(columnName);
                 }
 
                 // Add rows to the DataTable

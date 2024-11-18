@@ -37,9 +37,6 @@ namespace LocalizationManagerTool
                 return;
             }
 
-            // Create a new DataTable to hold the XML data
-            var dataTable = new DataTable();
-
             // Read the XML data into the DataTable
             dataTable.ReadXml(filePath);
 

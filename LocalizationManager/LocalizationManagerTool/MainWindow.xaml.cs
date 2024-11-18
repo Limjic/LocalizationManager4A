@@ -94,7 +94,7 @@ namespace LocalizationManagerTool
 
         private void ExportCs_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Exporting to .cs");
+            //TODO
         }
 
         private void DataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
