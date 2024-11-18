@@ -10,7 +10,7 @@ namespace LocalizationManagerTool
             {
                 string strLine = sr.ReadLine();
 
-                if (strLine != null)
+                while (strLine != null)
                 {
                     string[] strArray = strLine.Split(',');
                     int colCounter = 1;
@@ -23,6 +23,8 @@ namespace LocalizationManagerTool
                         colCounter++;
                     }
                     dataTable.Rows.Add(strArray);
+
+                    strLine = sr.ReadLine();
                 }
             }
             dataGrid.ItemsSource = null;
