@@ -18,7 +18,7 @@ namespace LocalizationManagerTool
                     {
                         if (colCounter > dataTable.Columns.Count)
                         {
-                            dataTable.Columns.Add("language" + colCounter.ToString());
+                            dataTable.Columns.Add("language" + (colCounter - 1).ToString());
                         }
                         colCounter++;
                     }
