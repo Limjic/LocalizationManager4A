@@ -145,7 +145,9 @@ namespace LocalizationManagerTool
 
         private void ExportCs_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            string filename;
+            GetExportFileName(out filename, ".cs");
+            ExportDataGridRoCS(filename);
         }
 
         private void DataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
