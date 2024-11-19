@@ -41,6 +41,15 @@ namespace LocalizationManagerTool
                 {
                     cppFile.WriteLine("#include \"file.h\"");
                     cppFile.WriteLine();
+                    cppFile.WriteLine("enum LanguageColumns");
+                    cppFile.WriteLine("{");
+                    cppFile.WriteLine("\ttranslation = 0,");
+                    for (int i = 1; i < dataGrid.Columns.Count; i++)
+                    {
+                        cppFile.WriteLine("\t" + dataTable.Columns[i].ColumnName + ",");
+                    }
+                    cppFile.WriteLine("};");
+                    cppFile.WriteLine();
                     cppFile.WriteLine("LanguageDataMap::LanguageDataMap()");
                     cppFile.WriteLine("{");
 
