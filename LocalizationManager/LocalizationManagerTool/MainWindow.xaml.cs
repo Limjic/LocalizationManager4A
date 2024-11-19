@@ -101,8 +101,8 @@ namespace LocalizationManagerTool
         {
             string filename;
             GetExportFileName(out filename, ".csv");
-            MessageBox.Show("Exporting to .csv");
             ExportCSV(filename);
+            MessageBox.Show(".csv Exported");
         }
 
         private void ExportXml_Click(object sender, RoutedEventArgs e)
@@ -111,17 +111,16 @@ namespace LocalizationManagerTool
             GetExportFileName(out filename, ".xml");
             //ExportDataGridToXml(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.xml");
             ExportDataGridToXml(dataGrid, filename);
-            
+            MessageBox.Show(".xml Exported");
         }
 
         private void ExportJson_Click(object sender, RoutedEventArgs e)
         {
             string filename;
             GetExportFileName(out filename, ".json");
-            //MessageBox.Show("Exporting to .json");
             //ExportDataGridToJson(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.json");
             ExportDataGridToJson(dataGrid, filename);
-
+            MessageBox.Show(".json Exported");
         }
 
         private void ExportCpp_Click(object sender, RoutedEventArgs e)
