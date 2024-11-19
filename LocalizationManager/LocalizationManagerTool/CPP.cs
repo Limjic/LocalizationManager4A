@@ -75,6 +75,28 @@ namespace LocalizationManagerTool
                     cppFile.WriteLine("{");
                     cppFile.WriteLine("\tdataMap = _dataMap;\r\n");
                     cppFile.WriteLine("}");
+                    cppFile.WriteLine();
+                    cppFile.WriteLine("std::string LanguageDataMap::GetValue(const std::string& key, LanguageColumns column)");
+                    cppFile.WriteLine("{");
+                    cppFile.WriteLine("\tauto it = dataMap.find(key);");
+                    cppFile.WriteLine("\tif (it != dataMap.end())");
+                    cppFile.WriteLine("\t{");
+                    cppFile.WriteLine("\t\tconst auto& values = it->second;");
+                    cppFile.WriteLine();
+                    cppFile.WriteLine("\t\tif (static_cast<size_t>(column) < values.size())");
+                    cppFile.WriteLine("\t\t{");
+                    cppFile.WriteLine("\t\t\treturn values[column];");
+                    cppFile.WriteLine("\t\t}");
+                    cppFile.WriteLine("\t\telse");
+                    cppFile.WriteLine("\t\t{");
+                    cppFile.WriteLine("\t\t\tthrow std::out_of_range(\"Column index is out of range.\");");
+                    cppFile.WriteLine("\t\t}");
+                    cppFile.WriteLine("\t}");
+                    cppFile.WriteLine("\telse");
+                    cppFile.WriteLine("\t{");
+                    cppFile.WriteLine("\t\tthrow std::invalid_argument(\"Key not found in the map.\");");
+                    cppFile.WriteLine("\t}");
+                    cppFile.WriteLine("}");
                 }
 
                 MessageBox.Show("Data exported to C++ files successfully!");
