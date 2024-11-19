@@ -82,7 +82,7 @@ namespace LocalizationManagerTool
                     cppFile.WriteLine();
                     cppFile.WriteLine("void LanguageDataMap::SetDataMap(map<string, vector<string>> _dataMap)");
                     cppFile.WriteLine("{");
-                    cppFile.WriteLine("\tdataMap = _dataMap;\r\n");
+                    cppFile.WriteLine("\tdataMap = _dataMap;");
                     cppFile.WriteLine("}");
                     cppFile.WriteLine();
                     cppFile.WriteLine("std::string LanguageDataMap::GetValue(const std::string& key, LanguageColumns column)");
