@@ -10,7 +10,7 @@ namespace LocalizationManagerTool
         {
             InitializeComponent();
             dataTable = new DataTable();
-            dataTable.Columns.Add("Name");
+            dataTable.Columns.Add("Key");
             dataGrid.ItemsSource = dataTable.DefaultView;
         }
 
@@ -29,6 +29,24 @@ namespace LocalizationManagerTool
             }
         }
 
+        private void RemoveLanguage_Click(Object sender, RoutedEventArgs e)
+        {
+            var dialog = new RemoveLanguageWindow();
+
+            bool? result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                string language = dialog.input.Text;
+                if (dataTable.Columns.Contains(language))
+                {
+                    dataTable.Columns.Remove(language);
+                }
+                dataGrid.ItemsSource = null;
+                dataGrid.ItemsSource = dataTable.DefaultView;
+            }
+        }
+
         private void Import_Click(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show("Import clicked");
@@ -38,7 +56,6 @@ namespace LocalizationManagerTool
             // Show open file dialog box
             bool? result = dialog.ShowDialog();
             dataTable = new DataTable();
-            dataTable.Columns.Add("Name");
 
             // Process open file dialog box results
             if (result == true)
@@ -82,8 +99,10 @@ namespace LocalizationManagerTool
 
         private void ExportCsv_Click(object sender, RoutedEventArgs e)
         {
+            string filename;
+            GetExportFileName(out filename, ".csv");
             MessageBox.Show("Exporting to .csv");
-
+            ExportCSV(filename);
         }
 
         private void ExportXml_Click(object sender, RoutedEventArgs e)
@@ -97,15 +116,24 @@ namespace LocalizationManagerTool
 
         private void ExportJson_Click(object sender, RoutedEventArgs e)
         {
+            string filename;
+            GetExportFileName(out filename, ".json");
             //MessageBox.Show("Exporting to .json");
-            ExportDataGridToJson(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.json");
+            //ExportDataGridToJson(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.json");
+            ExportDataGridToJson(dataGrid, filename);
 
         }
 
         private void ExportCpp_Click(object sender, RoutedEventArgs e)
         {
+            string filename;
+            string filenameH;
+            GetExportFileName(out filename, ".cpp");
+            filenameH = filename.Remove(filename.Length - 3, 3);
+            filenameH += "h";
             //MessageBox.Show("Exporting to .cpp");
-            ExportDataGridToCpp(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.cpp", "C:\\Users\\Etudiant1\\Desktop\\test\\file.h");
+            //ExportDataGridToCpp(dataGrid, "C:\\Users\\Etudiant1\\Desktop\\test\\file.cpp", "C:\\Users\\Etudiant1\\Desktop\\test\\file.h");
+            ExportDataGridToCpp(dataGrid, filename, filenameH);
 
 
             // TEST ONLY

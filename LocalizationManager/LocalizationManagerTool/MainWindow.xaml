@@ -22,9 +22,11 @@
                 <!-- Option Import -->
                 <MenuItem Header="Import" Click="Import_Click"/>
 
-                <MenuItem Header="Add Language" Click="AddLanguage_Click">
+                <MenuItem Header="Add Language" Click="AddLanguage_Click"/>
 
-                </MenuItem>
+                <MenuItem Header="Remove Language" Click="RemoveLanguage_Click"/>
+
+
             </MenuItem>
         </Menu>
         <DataGrid Name="dataGrid" Margin="0,18,0,-18" SelectionChanged="DataGrid_SelectionChanged"/>

@@ -3,11 +3,11 @@
 namespace LocalizationManagerTool
 {
     /// <summary>
-    /// Interaction logic for AddLanguageWindow.xaml
+    /// Interaction logic for RemoveLanguage.xaml
     /// </summary>
-    public partial class AddLanguageWindow : Window
+    public partial class RemoveLanguageWindow : Window
     {
-        public AddLanguageWindow()
+        public RemoveLanguageWindow()
         {
             InitializeComponent();
         }
