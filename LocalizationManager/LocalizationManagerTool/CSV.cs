@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Data;
+using System.IO;
+using System.Windows.Controls;
 
 namespace LocalizationManagerTool
 {
